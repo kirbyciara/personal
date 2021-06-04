@@ -38,35 +38,36 @@ Ciaras-MBP:~ stickwoman$ vault write aws/roles/my-role \
 > }
 > EOF
 Success! Data written to: aws/roles/my-role
-Ciaras-MBP:~ stickwoman$ 
-
-Ciaras-MBP:~ stickwoman$ 
 
 HashiCorp Options:
 
-# Option 1:
-# I just installed Vault for the first time for our initial proof of concept.
-# I’m just trying to start Vault in dev mode with `vault server -dev` and I get this error:
-# $ vault status
-# Error checking seal status: Get https://127.0.0.1:8200/v1/sys/seal-status: http: server gave
-# HTTP response to HTTPS client
-# How do I fix this?
+Option 1:
+I just installed Vault for the first time for our initial proof of concept.
+I’m just trying to start Vault in dev mode with `vault server -dev` and I get this error:
+$ vault status
+Error checking seal status: Get https://127.0.0.1:8200/v1/sys/seal-status: http: server gave
+HTTP response to HTTPS client
+How do I fix this?
 
-# Response:
-# Hi there! Thank you for reaching out. I'm sorry to hear that you're running into issues after installing # Vault for the first time and I can understand how frustrating that can be. This can happen when the     # environment variable isn't set. You can do that by running the following commands:
+Response:
+Hi there! Thank you for reaching out. I'm sorry to hear that you're running into issues after installing Vault for the first time and I can understand how frustrating that can be. This can happen when the environment variable isn't set. You can do that by running the following commands:
 $ export VAULT_ADDR='http://127.0.0.1:8200'
 $ export VAULT_TOKEN="s.XmpNPoi9sRhYtdKHaQhkHP6x"
 
-# Once you have run those two commands, you should try running 'vault server -dev' again. Please let me   # know if you're still having issues and I will be happy to look at other options for you that may be    #  causing the problem, preventing you from starting Vault in dev mode.
+Once you have run those two commands, you should try running 'vault server -dev' again. Please let me   know if you're still having issues and I will be happy to look at other options for you that may be    causing the problem, preventing you from starting Vault in dev mode.
 
-# Option 3:
-# Good morning! I'm sorry to hear about the issues you're running into when you're trying to write data to # your config file. It sounds like the policy may not have been set properly to give you the permissions  # needed. However, we should be able to get that taken care of by updating the policy.      
-# Before we do that, if you could run the following: 
-$ vault policy read security-admin
-# This will give me a better idea of what your full capabilities are so that I can better help            # determine what about the policy needs to be modified.
+Option 3:
+Good morning! I'm sorry to hear about the issues you're running into when you're trying to write data to  your config file. It sounds like the policy may not have been set properly to give you the permissions needed. However, we should be able to get that taken care of by updating the policy.      
+Before we do that, if you could run the following and paste the output: 
+$ vault policy read system-admin
+This will give me a better idea of what the full capabilities against that path are.
 
-# Resources used:
+Resources used:
 https://www.hashicorp.com/resources/policies-vault#step2
 https://stackoverflow.com/questions/63878533/vault-error-server-gave-http-response-to-https-client
 https://github.com/hashicorp/vault/issues/3591
 https://discuss.hashicorp.com/t/vault-failed-to-start/2529
+
+My thought process for both of these issues is to first show empathy and communicate that I understand that they are hitting roadblocks preventing them from completing their work. I also want to show that I will work with them to find the resolution and not guess, so I want to gather as much information as I can quickly to make an informed decision while also letting them know what the plan is and my theory based on the information they have already provided. Based on HashiCorp documentation and errors people have dicsussed online, option one is a possible TLS issue where it could be disabled, but I don't want to accuse anyone or make them feel inadequate because it's a common mistake that can be overlooked. Option 3 is a case of wanting to make sure I can get more information on what the policy is for that entity name and from there, I can help the user modify the policy to the proper settings. I don't want to just guess at what the new updated policy should be without knowing the full parameters of the policy for that user because it could just make things worse. I also try to summarize an issue to assure someone that I have heard what the problem is and understand it, that way if I'm off, they can correct me and there is no miscommunication moving forward.
+
+I am still unsure of how to exactly build the parameters of a Vault ACL policy for the initial exercise, but it is something I will certainly learn and get the hang of.
