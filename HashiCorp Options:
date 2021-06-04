@@ -59,7 +59,7 @@ Once you have run those two commands, you should try running 'vault server -dev'
 Option 3:
 Good morning! I'm sorry to hear about the issues you're running into when you're trying to write data to  your config file. It sounds like the policy may not have been set properly to give you the permissions needed. However, we should be able to get that taken care of by updating the policy.      
 Before we do that, if you could run the following and paste the output: 
-$ vault policy read system-admin
+$ vault policy read security-admin
 This will give me a better idea of what the full capabilities against that path are.
 
 Resources used:
