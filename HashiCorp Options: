@@ -61,7 +61,7 @@ $ export VAULT_TOKEN="s.XmpNPoi9sRhYtdKHaQhkHP6x"
 
 # Option 3:
 # Good morning! I'm sorry to hear about the issues you're running into when you're trying to write data to # your config file. It sounds like the policy may not have been set properly to give you the permissions  # needed. However, we should be able to get that taken care of by updating the policy.      
-# Before we do that, if you could run the following:
+# Before we do that, if you could run the following: 
 $ vault policy read security-admin
 # This will give me a better idea of what your full capabilities are so that I can better help            # determine what about the policy needs to be modified.
 
