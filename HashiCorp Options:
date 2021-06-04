@@ -1,0 +1,72 @@
+The default interactive shell is now zsh.
+To update your account to use zsh, please run `chsh -s /bin/zsh`.
+For more details, please visit https://support.apple.com/kb/HT208050.
+Ciaras-MBP:~ stickwoman$ export VAULT_ADDR='http://127.0.0.1:8200'
+Ciaras-MBP:~ stickwoman$ export VAULT_TOKEN="s.uNpSNXzoOUqfWyVMbIdzivzJ"
+Ciaras-MBP:~ stickwoman$ vault status
+Key             Value
+---             -----
+Seal Type       shamir
+Initialized     true
+Sealed          false
+Total Shares    1
+Threshold       1
+Version         1.7.2
+Storage Type    inmem
+Cluster Name    vault-cluster-80ff56a6
+Cluster ID      6f9cd0b1-caa8-6579-b194-445c17b84e50
+HA Enabled      false
+Ciaras-MBP:~ stickwoman$ vault secrets enable aws
+Success! Enabled the aws secrets engine at: aws/
+Ciaras-MBP:~ stickwoman$ vault write aws/config/root \
+> access_key=AKIAJWVN5Z4FOFT7NLNA \
+> secret_key=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 \
+> region=us-east-1
+Success! Data written to: aws/config/root
+Ciaras-MBP:~ stickwoman$ vault write aws/roles/my-role \
+> credential_type=iam_user \
+> policy_document=-<<EOF
+> {
+> "Version": "2012-10-17",
+> "Statement": [
+> {
+> "Effect": "Allow",
+> "Action": "ec2:*",
+> "Resource": "*"
+> }
+> ]
+> }
+> EOF
+Success! Data written to: aws/roles/my-role
+Ciaras-MBP:~ stickwoman$ 
+
+Ciaras-MBP:~ stickwoman$ 
+
+HashiCorp Options:
+
+# Option 1:
+# I just installed Vault for the first time for our initial proof of concept.
+# I’m just trying to start Vault in dev mode with `vault server -dev` and I get this error:
+# $ vault status
+# Error checking seal status: Get https://127.0.0.1:8200/v1/sys/seal-status: http: server gave
+# HTTP response to HTTPS client
+# How do I fix this?
+
+# Response:
+# Hi there! Thank you for reaching out. I'm sorry to hear that you're running into issues after installing # Vault for the first time and I can understand how frustrating that can be. This can happen when the     # environment variable isn't set. You can do that by running the following commands:
+$ export VAULT_ADDR='http://127.0.0.1:8200'
+$ export VAULT_TOKEN="s.XmpNPoi9sRhYtdKHaQhkHP6x"
+
+# Once you have run those two commands, you should try running 'vault server -dev' again. Please let me   # know if you're still having issues and I will be happy to look at other options for you that may be    #  causing the problem, preventing you from starting Vault in dev mode.
+
+# Option 3:
+# Good morning! I'm sorry to hear about the issues you're running into when you're trying to write data to # your config file. It sounds like the policy may not have been set properly to give you the permissions  # needed. However, we should be able to get that taken care of by updating the policy.      
+# Before we do that, if you could run the following: 
+$ vault policy read security-admin
+# This will give me a better idea of what your full capabilities are so that I can better help            # determine what about the policy needs to be modified.
+
+# Resources used:
+https://www.hashicorp.com/resources/policies-vault#step2
+https://stackoverflow.com/questions/63878533/vault-error-server-gave-http-response-to-https-client
+https://github.com/hashicorp/vault/issues/3591
+https://discuss.hashicorp.com/t/vault-failed-to-start/2529
