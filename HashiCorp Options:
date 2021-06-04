@@ -39,6 +39,17 @@ Ciaras-MBP:~ stickwoman$ vault write aws/roles/my-role \
 > EOF
 Success! Data written to: aws/roles/my-role
 
+Ciaras-MBP:personal stickwoman$ tee my-role-policy.hcl <<EOF
+> #This grants access to the iam user
+> path "aws/roles/my-role" {
+> capabilities = ["create","read","update"]
+> }
+> EOF
+#This grants access to the iam user
+path "aws/roles/my-role" {
+capabilities = ["create","read","update"]
+}
+
 HashiCorp Options:
 
 Option 1:
