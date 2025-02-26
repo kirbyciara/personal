@@ -1,1 +1,1 @@
-This is just a private repo to stash things
+This is just a private repo to stash things like scripts
