@@ -2,7 +2,7 @@
 # This example configuration provides basic automations to get started with gitStream.
 # View the gitStream quickstart for more examples: https://docs.gitstream.cm/examples/
 manifest:
-  version: 1.2
+  version: 1.3
 
 
 automations:
